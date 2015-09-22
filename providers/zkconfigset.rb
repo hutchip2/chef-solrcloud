@@ -53,6 +53,11 @@ action :create do
       only_if { node['solrcloud']['manage_zkconfigsets_source'] }
     end
 
+    Chef::Log.info("The configset name is #{new_resource.configset_name}"
+    Chef::Log.info("The solr zkcli is #{new_resource.solr_zkcli}"
+    Chef::Log.info("The zkconfigset_home is #{new_resource.zkconfigsets_home}"
+    Chef::Log.info("The zkhost is #{new_resource.zkhost}"
+
     # Upload on any config update
     execute "zk_config_set_upconfig_#{new_resource.configset_name}_update_upload" do
       command "#{new_resource.solr_zkcli} -zkhost #{new_resource.zkhost} -cmd upconfig -confdir #{::File.join(new_resource.zkconfigsets_home, new_resource.configset_name, 'conf')} -confname #{new_resource.configset_name} 2>&1"
