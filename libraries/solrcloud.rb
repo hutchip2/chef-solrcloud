@@ -120,8 +120,9 @@ module SolrCloud
       url << "&autoAddReplicas=#{opts[:auto_add_replicas]}" if opts[:auto_add_replicas]
       url << "&createNodeSet=EMPTY"
       Chef::Log.info("The url being called #{url}")
-      reply = httpconn.request(Net::HTTP::Post.new(url, headers))
-      data  = JSON.pretty_generate(JSON.parse(reply.body))
+      uri = URI(url))
+      reply = Net::HTTP.get(uri)
+      data  = JSON.pretty_generate(reply)
 
       if reply.code.to_i == 200
         Chef::Log.info("collection #{name} created. => #{data}")
