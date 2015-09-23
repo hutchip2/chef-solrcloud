@@ -107,7 +107,7 @@ module SolrCloud
       # Required Parameters
       # Not necessary, but keeping it clean
       context_path = opts[:context_path] == '/' ? '' : opts[:context_path]
-      url = "localhost:8983/solr/admin/collections?wt=json&action=CREATE&name=#{name}&replicationFactor=#{replication_factor}"
+      url = "#{context_path}/admin/collections?wt=json&action=CREATE&name=#{name}&replicationFactor=#{replication_factor}"
       # Optional Parameters
       url << "&numShards=#{opts[:num_shards]}" if opts[:num_shards]
       url << "&shards=#{opts[:shards]}" if opts[:shards]
@@ -120,9 +120,8 @@ module SolrCloud
       url << "&autoAddReplicas=#{opts[:auto_add_replicas]}" if opts[:auto_add_replicas]
       url << "&createNodeSet=EMPTY"
       Chef::Log.info("The url being called #{url}")
-      uri = URI(url)
-      reply = Net::HTTP.get(uri)
-      data  = JSON.pretty_generate(reply)
+      reply = httpconn.request(Net::HTTP::Post.new(url, headers))
+      data  = JSON.pretty_generate(JSON.parse(reply.body))
 
       if reply.code.to_i == 200
         Chef::Log.info("collection #{name} created. => #{data}")
@@ -152,7 +151,7 @@ module SolrCloud
       # Not necessary, but keeping it clean
       context_path = context_path == '/' ? '' : context_path
       url = "#{context_path}/admin/collections?wt=json&action=RELOAD&name=#{name}"
-      reply = httpconn.request(Net::HTTP::Get.new(url, headers))
+      reply = httpconn.request(Net::HTTP::Post.new(url, headers))
       data = JSON.pretty_generate(JSON.parse(reply.body))
       if reply.code.to_i == 200
         Chef::Log.info("collection #{name} reloaded. => #{data}")
