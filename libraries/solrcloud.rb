@@ -118,6 +118,7 @@ module SolrCloud
       url << "&router.field=#{opts[:router_field]}" if opts[:router_field]
       url << "&async=#{opts[:async]}" if opts[:async]
       url << "&autoAddReplicas=#{opts[:auto_add_replicas]}" if opts[:auto_add_replicas]
+      Chef::Log.info("The url being called #{url}")
       reply = httpconn.request(Net::HTTP::Post.new(url, headers))
       data  = JSON.pretty_generate(JSON.parse(reply.body))
 
