@@ -151,7 +151,7 @@ module SolrCloud
       # Not necessary, but keeping it clean
       context_path = context_path == '/' ? '' : context_path
       url = "#{context_path}/admin/collections?wt=json&action=RELOAD&name=#{name}"
-      reply = httpconn.request(Net::HTTP::Post.new(url, headers))
+      reply = httpconn.request(Net::HTTP::Get.new(url, headers))
       data = JSON.pretty_generate(JSON.parse(reply.body))
       if reply.code.to_i == 200
         Chef::Log.info("collection #{name} reloaded. => #{data}")
