@@ -107,7 +107,7 @@ module SolrCloud
       # Required Parameters
       # Not necessary, but keeping it clean
       context_path = opts[:context_path] == '/' ? '' : opts[:context_path]
-      url = "#{context_path}/admin/collections?wt=json&action=CREATE&name=#{name}&replicationFactor=#{replication_factor}"
+      url = "localhost:8983/solr/admin/collections?wt=json&action=CREATE&name=#{name}&replicationFactor=#{replication_factor}"
       # Optional Parameters
       url << "&numShards=#{opts[:num_shards]}" if opts[:num_shards]
       url << "&shards=#{opts[:shards]}" if opts[:shards]
