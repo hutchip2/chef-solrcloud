@@ -17,14 +17,12 @@
 # limitations under the License.
 #
 
-include_recipe 'solrcloud::attributes'
-
 actions :create, :delete, :reload
 
 default_action :create
 
 attribute :num_shards,    :kind_of => [String, Integer], :default => 1
-attribute :context_path,  :kind_of => String, :default => node['solrcloud']['jetty_config']['context']['path']
+attribute :context_path,  :kind_of => String, :default => '/' + node['solrcloud']['context_name']
 attribute :shards,        :kind_of => String, :default => nil
 attribute :router_field,  :kind_of => String, :default => nil
 attribute :async,         :kind_of => String, :default => nil
