@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe 'solrcloud::attributes'
+
 actions :create, :delete, :reload
 
 default_action :create
