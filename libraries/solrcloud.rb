@@ -120,7 +120,7 @@ module SolrCloud
       url << "&autoAddReplicas=#{opts[:auto_add_replicas]}" if opts[:auto_add_replicas]
       url << "&createNodeSet=EMPTY"
       Chef::Log.info("The url being called #{url}")
-      uri = URI(url))
+      uri = URI(url)
       reply = Net::HTTP.get(uri)
       data  = JSON.pretty_generate(reply)
 
