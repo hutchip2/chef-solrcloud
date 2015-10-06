@@ -34,6 +34,7 @@
 -->
 
 <solr>
+  <% logger = Logger.new(STDOUT) %>
   <str name="adminHandler"><%=node.solrcloud.solr_config.admin_handler-%></str>
   <% if node.solrcloud.version !~ /^4\.[1-9][0-9]\.\d|^5/ -%>
   <str name="adminPath"><%=node.solrcloud.solr_config.admin_path-%></str>
