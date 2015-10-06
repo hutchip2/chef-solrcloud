@@ -19,4 +19,3 @@
 
 include_recipe 'solrcloud::attributes'
 include_recipe 'solrcloud::tarball'
-include_recipe 'solrcloud::cores'
