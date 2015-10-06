@@ -41,10 +41,9 @@
   <% end -%>
   <int name="coreLoadThreads"><%=node.solrcloud.solr_config.core_load_threads-%></int>
   <%if node.solrcloud.cores_home and node.solrcloud.cores_home != node.solrcloud.solr_home-%>
-  <%= logger.debug("**************** SETTING CORE ROOT DIRECTORY") %>
   <str name="coreRootDirectory"><%=node.solrcloud.solr_config.core_root_directory-%></str> <!-- usually solrHome  -->
+  <%= logger.debug("**************** Core Root Directory: ${node.solrcloud.solr_config.core_root_directory}") %>
   <%else-%>
-  <%= logger.debug("**************** NOT SETTING CORE ROOT DIRECTORY") %>
   <!-- <str name="coreRootDirectory"><%=node.solrcloud.solr_config.core_root_directory-%></str> --> <!-- usually solrHome  -->
   <%end-%>
   <!-- <str name="managementPath">${managementPath:<%=node.solrcloud.solr_config.management_path-%>}</str> -->
