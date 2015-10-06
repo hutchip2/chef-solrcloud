@@ -36,3 +36,9 @@ file '/usr/local/solr/solr/cores/core3/core.properties' do
   mode '0755'
   owner 'ec2-user'
 end
+
+log 'message' do
+  message '********** Cores recipe has been executed'
+  level :info
+end
+
