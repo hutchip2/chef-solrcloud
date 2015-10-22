@@ -36,5 +36,5 @@ attribute :create_node_set,         :kind_of => String, :default => nil
 attribute :replication_factor,      :kind_of => [String, Integer], :default => 1
 attribute :max_shards_per_node,     :kind_of => [String, Integer], :default => nil
 attribute :collection_config_name,  :kind_of => String, :default => nil
-attribute :zkcli,           :kind_of => String, :default => node['solrcloud']['zookeeper']['zkcli']
+attribute :zkcli,           :kind_of => String, :default => node['solrcloud']['solr_config']['solrcloud']['zk_host'].second #:default => node['solrcloud']['zookeeper']['zkcli']
 attribute :zkhost,          :kind_of => String, :default => node['solrcloud']['solr_config']['solrcloud']['zk_host'].first # Need only one node
